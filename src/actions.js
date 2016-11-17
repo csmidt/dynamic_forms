@@ -1,0 +1,1 @@
+export const GET_FORMFIELDS = 'GET_FORMFIELDS'
