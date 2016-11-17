@@ -8,6 +8,7 @@ import TextField from 'material-ui/TextField'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import RaisedButton from 'material-ui/RaisedButton'
+import 'font-awesome/css/font-awesome.css'
 
 const style = {
   margin: 12,
@@ -18,7 +19,8 @@ const style = {
 const DynamicFormContainer = React.createClass({
   getInitialState: function() {
     return {
-      formFields: []
+      formFields: [],
+
     }
 	},
   componentWillMount: function () {
@@ -47,6 +49,7 @@ const DynamicFormView = React.createClass ({
     obj[id] = value
     this.setState(obj)
   },
+
 	render: function() {
 		return (
 	      <div className="dynamicForm">
@@ -54,55 +57,53 @@ const DynamicFormView = React.createClass ({
             {this.props.formFields.map(field => {
               if (field.type === "text") {
                 return <TextField
-                       key={`i + ${field.id}`}
-                       id="fname"
-                       fullWidth={true}
-                       value={field.label}  
-                       onChange={this.update}    
-                        />
+                         key={field.id}
+                         id="fname"
+                         fullWidth={true}
+                         value={field.label}
+                         onChange={this.update}    
+                          />
                 }else if (field.type === "select") {
                   return <SelectField
-                       floatingLabelText="Select Language"
-                       value={field.label}
-                       
-                          >
-                       <MenuItem value={field.options.value} primaryText={field.options.label} />
-                       <MenuItem value={field.options.value} primaryText={field.options.label} />
-                       <MenuItem value={field.options.value} primaryText={field.options.label} />
-                       <MenuItem value={field.options.value} primaryText={field.options.label} />
-                       <MenuItem value={field.options.value} primaryText={field.options.label} />
-                     </SelectField>
+                         key={field.id}
+                         id="select language"
+                         value={field.label}
+                         onChange={this.update}
+                           >
+                           <MenuItem value={field.label} primaryText={field.label} />
+                           {field.options.map(label => {
+                              return (
+                                <MenuItem key={field.id} value={label.value} primaryText={label.label} />
+                              )
+                           })}
+                        </SelectField>
                 } else if (field.type = "tel") {
                   return <TextField
-                       key={`i + ${field.id}`}
-                       id="fname"
-                       fullWidth={true}
-                       value={field.label}
-                       onChange={this.update}       
-                        />
+                         type="tel"
+                         key={field.id}
+                         id="fname"
+                         fullWidth={true}
+                         value={field.label}
+                         onChange={this.update}       
+                          />
                 } else if (field.type === "email"){
                   return <TextField
-                       key={`i + ${field.id}`}
-                       id="fname"
-                       fullWidth={true}
-                       value={field.label}
-                       onChange={this.update}       
-                        />        
+                         key={field.id}
+                         id="fname"
+                         fullWidth={true}
+                         value={field.label}
+                         onChange={this.update}       
+                          />        
                 } else if (field.type === "textarea") {
                   return <TextField
-                        key={`i + ${field.id}`}
-                        multiLine={true}
-                        rows={2}
-                        rowsMax={4}
-                        onChange={this.update} 
-                      />
-
-                }
- 
-                
-              
-            })}
-               	      		   
+                          key={field.id}
+                          multiLine={true}
+                          rows={8}
+                          rowsMax={10}
+                          onChange={this.update} 
+                        />
+                  }                              
+                })}            	      		   
 	      	<footer className="footer">
             <div className="footerButton">
               <RaisedButton type="submit" label="Submit" primary={true} style={style.button} onClick={this.update}/>
@@ -122,4 +123,8 @@ export default DynamicFormContainer
 //                       value={field.label}      
 //                 />
                
-//             ))}  
+
+//             ))} 
+//{`<i class= ${field.icon} aria-hidden="true"></i> + $ 
+//
+//
