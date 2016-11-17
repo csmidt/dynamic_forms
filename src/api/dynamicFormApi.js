@@ -9,7 +9,7 @@ export function getFormFields() {
 	return axios.get("formFields").then(resp => {
 		store.dispatch ({
 			type: 'GET_FORMFIELDS',
-			fields: resp.data
+			formFields: resp.data
 		})
 	})
 }

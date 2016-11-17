@@ -1,0 +1,32 @@
+html {
+	box-sizing: border-box;
+	font-family: 'Roboto', sans-serif;
+}
+
+*,*:after,*:before
+{box-sizing: inherit}
+
+.dynamicForm {
+	width:600px;
+	border: 1px solid #d9d9d9;
+}
+
+h3 {
+	height: 60px;
+	background-color: #428BCA;
+	margin-top: 0px;
+	color: #fff;
+	text-align:center;
+	margin-top: 15px;
+}
+
+.footer {
+	height:60px;
+	background-color: #C9DEF0;
+	margin-top: -10px;
+}
+
+.footerButton {
+	margin-top: 10px;
+	margin-left: 30%;
+}
