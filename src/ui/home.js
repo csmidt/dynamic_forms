@@ -19,8 +19,7 @@ const style = {
 const DynamicFormContainer = React.createClass({
   getInitialState: function() {
     return {
-      formFields: [],
-
+      formFields: []
     }
 	},
   componentWillMount: function () {
@@ -41,13 +40,17 @@ const DynamicFormContainer = React.createClass({
     )
   }
 })
+
 const DynamicFormView = React.createClass ({
-  update: function(e) {
-    var obj = {}
-    var id = e.target.id
-    var value = e.target.value
-    obj[id] = value
-    this.setState(obj)
+  getInitialState: function () {
+    return {
+      value:''
+    }
+  },
+  update: function(e,i,value) {
+    this.setState({
+      value:value
+    })
   },
 
 	render: function() {
@@ -60,20 +63,19 @@ const DynamicFormView = React.createClass ({
                          key={field.id}
                          id="fname"
                          fullWidth={true}
-                         value={field.label}
-                         onChange={this.update}    
+                         floatingLabelText={field.label}
                           />
                 }else if (field.type === "select") {
                   return <SelectField
                          key={field.id}
-                         id="select language"
-                         value={field.label}
+                         id={field.id}
+                         floatingLabelText={field.label}
                          onChange={this.update}
-                           >
-                           <MenuItem value={field.label} primaryText={field.label} />
-                           {field.options.map(label => {
+                         value={this.state.value}
+                        >
+                           {field.options.map((label,i) => {
                               return (
-                                <MenuItem key={field.id} value={label.value} primaryText={label.label} />
+                                <MenuItem key={'select' + i} value={label.value} primaryText={label.label} />
                               )
                            })}
                         </SelectField>
@@ -83,16 +85,15 @@ const DynamicFormView = React.createClass ({
                          key={field.id}
                          id="fname"
                          fullWidth={true}
-                         value={field.label}
-                         onChange={this.update}       
+                         floatingLabelText={field.label}
                           />
                 } else if (field.type === "email"){
                   return <TextField
+                         type="email"
                          key={field.id}
                          id="fname"
                          fullWidth={true}
-                         value={field.label}
-                         onChange={this.update}       
+                         floatingLabelText={field.label}
                           />        
                 } else if (field.type === "textarea") {
                   return <TextField
@@ -100,7 +101,6 @@ const DynamicFormView = React.createClass ({
                           multiLine={true}
                           rows={8}
                           rowsMax={10}
-                          onChange={this.update} 
                         />
                   }                              
                 })}            	      		   
